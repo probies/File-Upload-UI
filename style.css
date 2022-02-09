@@ -1,0 +1,69 @@
+#Upload_Window{
+    height:320px;
+    width: 450px;
+    background-color: white; 
+    margin:auto ;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 20px;
+    border-color:0.5px #fff;
+    box-shadow: 0px 0px 20px 0px #d7d6e4;
+    transition: all 1s ease;
+}
+
+.dragover{
+    background-color: #e5e8ef;
+    height: 290px;
+    margin: 15px;
+    outline:dashed #808285 2px;
+    border-radius: 20px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.drag{
+    background-color: #e5e8ef;
+    height: 260px;
+    margin: 30px;
+    outline:dashed #bdc0c8 2px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.dragover > .drop_section{
+    padding-top:40px!important;
+}
+
+
+#separator{
+    display: flex;
+    flex-direction: row;
+    color:#c3c3c3;
+}
+
+#separator:before,
+#separator:after {
+    content: "";
+     flex: 1 1;
+     border-bottom: 1px solid #c3c3c3;
+     margin: auto;
+     margin-right:5px;
+     margin-left:5px;
+}
+
+#Progess_Bar_Container{
+    display: none;
+    background-color: #f6f6f6!important;
+    box-shadow:0px 15px 20px 0px #d7d6e4;
+    border-radius: 0px 0px 15px 15px;
+    transition: all 1s ease;
+}
+
+.progress.active .progress-bar {
+    //transition: all 1s ease;
+    -webkit-transition: none !important;
+    transition: none !important;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload UI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #e5e8ef;">
+    <div id="Upload_Window" >
+        <div id="Upload_Container" class="px-4 drag">
+            <div class="drop_section text-center py-4 mx-2" >
+                <img src="../assets/folder.png" alt="Folder" class="img-fluid" style="height: 48px;">
+                <div class="d-flex justify-content-center">
+                <p class="pt-3 font-weight-bold" style="max-width: 325px;">Drag your documents, photos or video here to start uploading.</p>
+                </div>
+                <p id="separator">OR</p>
+                <input id="upload" type="file" onchange="UploadFile(event.target.files[0])" style="display: none;">
+                <button id="select_files" class="btn btn-primary px-4 font-weight-bold" onclick="SelectFile()">Browse files</button>
+            </div>
+        </div>
+        <div id="Progess_Bar_Container" class="mx-5 py-4">
+            <div class="progress progress-striped active mx-3">
+                <div id="Progress" class="progress-bar progress-bar-success" style="width:1%">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+
+        let UploadArea = document.getElementById('Upload_Window')
+
+        let UploadContainer = document.getElementById('Upload_Container')
+
+        UploadArea.addEventListener("dragover", (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        UploadArea.addEventListener("dragenter", (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            UploadContainer.classList.add("dragover");
+            UploadContainer.classList.remove("drag");
+            UploadArea.style.transform = "scale(1.2)";
+        });
+
+        UploadArea.addEventListener("dragleave", (e) => {
+            UploadContainer.classList.remove("dragover");
+            UploadContainer.classList.add("drag");
+            UploadArea.style.transform = "scale(1)";
+        });
+
+        UploadArea.addEventListener("drop", (e) => {
+            e.preventDefault();
+            UploadArea.style.transform = "perspective(700px) rotateX(15deg) scale(1)";
+            setTimeout(() => {
+                UploadArea.style.transform = "scale(1)";
+            }, 1000);
+            //console.log(e.dataTransfer.files);
+            //add file to input
+            UploadFile(e.dataTransfer.files[0]);
+        });
+
+        function SelectFile(){
+            document.getElementById("upload").click();
+        }
+
+        function UploadFile(event){
+            console.log(event);
+            document.getElementById("Progess_Bar_Container").style.display = "block";
+            $(".progress-bar").animate({
+                width: "100%"
+            }, 2500);
+            $(".progress-bar").animate({
+                width: "0%"
+            }, 0);
+            setTimeout(function(){
+                document.getElementById("Progess_Bar_Container").style.display = "none";
+                //document.querySelector(".progress-bar").style.width = "1%";
+                UploadContainer.classList.remove("dragover");
+                UploadContainer.classList.add("drag");
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
